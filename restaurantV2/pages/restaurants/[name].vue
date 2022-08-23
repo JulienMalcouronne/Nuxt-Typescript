@@ -1,13 +1,26 @@
 <script setup lang="ts">
 import restaurants from "@/data.json";
+
 const route = useRoute();
 const name = route.params.name;
+
 const restaurant = restaurants.find((r) => r.name === name);
+
+useMeta({
+  title: restaurant.value ? name: "404 - Restaurant Not Found",
+  meta: [
+    {
+      name: "viewport",
+      content: "width=device-width"
+    }
+  ]
+})
 </script>
 
 <template>
   <div>
-    <div class="restaurant-container">
+    <NuxtLayout name="custom" v-if="restaurant">
+    <div  class="restaurant-container">
       <div class="image-container">
         <img :src="restaurant.imageUrl" alt="" />
       </div>
@@ -24,6 +37,22 @@ const restaurant = restaurants.find((r) => r.name === name);
         <p class="content">{{ restaurant.content }}</p>
       </div>
     </div>
+    </NuxtLayout>
+
+    <div v-else class="restaurant-not-found">
+    <NuxtLayout  name="error">
+        <template #header>
+          <h1>Restaurant not found</h1>
+        </template>
+
+        <template #redirectEl>
+          <button class="btn btn-primary btn-lg" @click="$router.push('/restaurants')">
+            Go Back
+          </button>
+        </template>
+    </NuxtLayout>
+    </div>
+
   </div>
 </template>
 
