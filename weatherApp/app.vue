@@ -67,10 +67,10 @@ const goBack = () => {
         <div>
           <h1 class="text-7xl text-white">{{ city.name }}</h1>
           <p class="font-extralight text-2xl mt-2 text-white">{{ today }}</p>
-          <img
+          <!-- <img
             :src="`https://openweathermap.org/img/wn/${city.weather[0].icon}@4x.png`"
             class="w-56 icon"
-          />
+          /> -->
         </div>
         <div>
           <p class="text-9xl text-white font-extralight">
